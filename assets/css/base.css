@@ -1,0 +1,449 @@
+:root{
+    --white: #fff;
+    --black: #000;
+    --blue: #103362; 
+    --gray: #CCCCCC;
+    --graident-1: linear-gradient(45deg, #feac5e, #c779d0, #4bc0c8, #40e0d0, #ff8c00, #ff0080);
+    --graident-2: linear-gradient(180deg,#373b44, #4286f4);
+    --pastel: #EF9595;
+    --background-color-1: #F7E4DF;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--white);
+}
+
+button{
+    user-select: none;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+.fa-brands{
+    cursor: pointer;
+}
+
+.app{
+    width: 100%;
+    height: 100%;
+}
+
+.countdown{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    user-select: none;
+    object-position: center center;
+    /* object-fit: contain; */
+}
+
+.countdown__title{
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 1rem;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    text-transform: uppercase;
+    font-family: 'Oldenburg', serif;
+    ;background-size: 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: var(--graident-1);
+    /* -webkit-animation: animation_color 4s ease infinite alternate;
+    -moz-animation: animation_color 4s ease infinite alternate; */
+    animation: animation_color 3s ease infinite alternate;
+    width: 100%;
+    user-select: none;
+}
+
+.time__wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.days, .hours, .minutes, .seconds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hours, .minutes, .seconds {
+    margin-left: 20px;
+}
+
+
+.title, .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    text-transform: uppercase;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.days .title, .hours .title, .minutes .title {
+    transform: translateX(-20px);
+}
+
+.time{
+    height: 150px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 20px;
+}
+
+.two_dots_mark{
+    color: var(--white);
+    font-size: 3rem;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+.time + .time {
+    margin-left: 10px;
+}
+
+.time > p {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+@keyframes animation_color {
+    0%{
+        background-position: left;
+    }
+    100%{
+        background-position: right;
+    }
+}
+
+.main{
+    display: none;
+    transition: all 0.15s ease;
+    flex-direction: column;
+    background-color: var(--background-color-1);
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    user-select: none;
+}
+
+.ribbon-top-left{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.ribbon-top-center{
+    position: absolute;
+    top: -130px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.ribbon-top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.main__title{
+    color: var(--blue);
+    font-family: 'Oldenburg', serif;
+    font-size: 7.5rem;
+    font-weight: 400;
+    line-height: normal;
+    transform: translateY(-40px);
+    padding-bottom: 40px;
+    z-index: 1;
+}
+
+.main__wish{
+    color: var(--blue);
+    font-family: 'Oldenburg', serif;
+    font-size: 3.6rem;
+    font-weight: 400;
+    line-height: normal;
+    transform: translateY(-40px);
+    max-width: 750px;
+    text-align: center;
+    z-index: 1;
+}
+
+.balloon-left, .balloon-right{
+    position: absolute;
+    height: 80%;
+    background-size: cover;
+}
+
+.balloon-left{
+    left: 0;
+}
+
+.balloon-right{
+    right: 0;
+}
+
+.ribbon-left{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-100%);
+}
+
+.gift-left{
+    position: absolute;
+    width: 300px;
+    height: 170px;
+    object-fit: cover;
+    object-position: top center; 
+    top: 100%;
+    left: 200px;
+    transform: translateY(-100%);
+}
+
+.birthday-cake{
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%,-100%);
+}
+
+.gift-right{
+    position: absolute;
+    width: 300px;
+    height: 170px;
+    object-fit: cover;
+    object-position: top center; 
+    top: 100%;
+    right: 200px;
+    transform: translateY(-100%); 
+}
+
+.ribbon-right{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transform: translateY(-100%);
+}
+
+/* .happy-women-day{
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+} */
+
+/* #flowers {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+}
+
+#flower img{
+    width: 50px;
+    object-fit: cover;
+} */
+
+/* .flower {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 1;
+    animation: fall-fade 5s linear forwards , random-position 0s linear forwards;
+    background-color: transparent;
+    z-index: 1;
+} */
+
+/* Thêm quy tắc @keyframes fall-fade */
+/*@keyframes fall-fade {
+   0% {
+    top: calc(-50px + 50% * var(--random));
+    transform: rotate(0deg);
+    opacity: 0;
+   }
+   25%{
+    opacity: 1;
+   }
+   100% {
+    top: calc(100% - 50px);
+    transform: rotate(360deg);
+    opacity: 0;
+   }
+}
+
+@keyframes random-position {
+  
+   to {
+    left: calc(10px + 100% * var(--random));
+   }
+}
+
+.happy-women-day__title{
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 1rem;
+    padding-bottom: 50px;
+    text-transform: uppercase;
+    font-family: 'Pacifico', cursive;
+    ;background-size: 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: var(--graident);
+    -webkit-animation: animation_color 4s ease infinite alternate;
+    -moz-animation: animation_color 4s ease infinite alternate;
+    animation: animation_color 4s ease infinite alternate;
+    width: 100%;
+    user-select: none;
+    z-index: 1;
+}
+
+.women__img{
+    position: absolute;
+    top: 10%;
+    width: 30%;
+    height: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+    object-position: center center; 
+}
+
+.happy-women-day__wish{
+    left: 100px;
+    font-size: 2.4rem;
+    width: 400px;
+    float: left; 
+    z-index: 1;
+    user-select: none;
+    overflow: hidden;
+    position: absolute; 
+    animation: to_up 3s linear forwards;
+
+}
+
+.fa-heart{
+    color: red;
+    font-size: 2.4rem;
+}
+
+@keyframes to_up {
+    from {
+        top: 100%;
+        height: 0%;
+    }
+    to {
+        top: 30%;
+        height: fit-content;
+    }
+}
+
+/* .happy-women-day__wish::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    animation: caret infinite;
+    animation-duration: 1s;
+    animation-timing-function: steps(1, end);
+} */
+
+/* @keyframes typing {
+    0%, 50%, 100% {
+        width: 0;
+    }
+    10%, 40% {
+        width: 400px;
+    }
+}
+
+@keyframes caret {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+} */
+
+/* .happy-women-day__wish {
+    animation: type 5s infinite;
+  }
+  
+  @keyframes type {
+    0% {
+      text-indent: 0;
+    }
+  
+    10% {
+      text-indent: 1px;
+    }
+  
+    20% {
+      text-indent: 2px;
+    }
+  
+    100% {
+      text-indent: -9999px;
+    }
+}
+
+.bouquet__img{
+    position: absolute;
+    top: 30%;
+    right: 100px;
+    transform: translateY(-50%);
+    width: 300px;
+    object-fit: cover;
+    object-position: center center; 
+    animation: shake 3s infinite alternate;
+}
+
+@keyframes shake {
+    from{
+        transform: rotate(-45deg);
+    }
+    to{
+        transform: rotate(45deg);
+    }
+}   */
