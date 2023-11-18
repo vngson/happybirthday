@@ -8,34 +8,102 @@ confetti.config = {
     zIndex: 9999,
 };
 
-// Create a new confetti effect and launch it indefinitely
-const launchConfetti = () => {
-    confetti({
+const confettiParticles = []; // Mảng chứa các hạt confetti
+
+// Hàm để tạo một hạt confetti và thêm vào mảng
+const createConfetti = () => {
+    const confettiInstance = confetti({
         particleCount: Math.floor(Math.random() * 150 + 50),
         origin: {
             x: Math.random(),
             y: Math.random() - 0.2
         },
-        colors: ["#FFD700", "#FFDF00", "#D4AF37", "#F0E68C","CCAC00","#FF0000", "#00BFFF", "#50C7C7", "#00FF00"] 
+        colors: ["#FFD700", "#FFDF00", "#D4AF37", "#F0E68C","CCAC00","#FF0000", "#00BFFF", "#50C7C7", "#00FF00"],
     });
-    setTimeout(launchConfetti, 200);
+
+    confettiParticles.push(confettiInstance);
 };
 
-// Launch the confetti effect
-// launchConfetti();
+// Hàm để cập nhật và vẽ hiệu ứng confetti
+const updateConfetti = () => {
+    confettiParticles.forEach((particle, index) => {
+        particle.ticks--;
+
+        if (particle.ticks <= 0) {
+            // Xóa hạt confetti khi hết thời gian
+            confettiParticles.splice(index, 1);
+            particle.reset();
+        }
+    });
+
+    if (Math.random() > 0.95) {
+        // Tạo một hạt confetti mới với xác suất 5%
+        createConfetti();
+    }
+
+    requestAnimationFrame(updateConfetti);
+};
+
+// Khởi tạo hiệu ứng confetti
+const startConfetti = () => {
+    createConfetti();
+    updateConfetti();
+};
+
+const stopConfetti = () => {
+  confettiParticles.forEach((particle) => {
+      particle.reset();
+  });
+  confettiParticles.length = 0; // Xóa mảng hạt confetti
+};
+
+function toEnglish(num) {
+  const specialCases = { 1: '1st', 2: '2nd', 3: '3rd' };
+  const suffixes = ['th', 'st', 'nd', 'rd', 'th'];
+ 
+  // For special cases, return the corresponding English representation
+  if (specialCases.hasOwnProperty(num)) {
+     return specialCases[num];
+  }
+ 
+  // Convert the number to words using toLocaleString
+  let words = num.toLocaleString('en-US', { style: 'ordinal' });
+ 
+  // Get the last character of the word representation, which determines the suffix
+  let lastChar = words.charAt(words.length - 1);
+  let suffixIndex = Number(lastChar);
+ 
+  // Replace the suffix of the word representation with the correct English ordinal suffix
+  words = words.slice(0, -1) + suffixes[suffixIndex];
+ 
+  return words;
+ }
 
 // Khai báo biến lưu trữ ngày sinh nhật mong muốn
-var birthday = new Date("2023-11-16T00:00:00");
-
+var birthday = new Date("2023-11-17T22:42:00");
 // Khai báo biến lưu trữ phần tử html hiển thị thời gian còn lại
 var countdown = document.querySelector(".countdown");
 var main = document.querySelector(".main");
 
+function restartCountdown() {
+  stopConfetti();
+  birthday.setFullYear(birthday.getFullYear() + 1);
+
+    // Restart the countdown
+  interval = setInterval(updateCountdown, 500);
+}
 // Khai báo hàm để cập nhật thời gian còn lại
 function updateCountdown() {
+  countdown.style.display = "flex";
+      // Hiển thị thẻ B bằng cách đặt display là block
+    main.style.display = "none";
   // Lấy thời gian hiện tại
   var now = new Date();
 
+  let age = birthday.getFullYear() - 2002;
+  let ageOrdinal =  toEnglish(age);
+  var main__wish = document.querySelector(".main__wish");
+  main__wish.innerHTML = `Happy special day, my ${ageOrdinal} birthday`
   // Tính khoảng cách giữa thời gian hiện tại và ngày sinh nhật
   var distance = birthday - now;
 
@@ -43,13 +111,23 @@ function updateCountdown() {
   if (distance <= 0) {
     // Dừng hàm setInterval
     clearInterval(interval);
-
-    // Hiển thị thông báo chúc mừng sinh nhật
-    // countdown.innerHTML = "Chúc mừng sinh nhật!";
-
     // Chạy chương trình chính do bạn code
-    runMainProgram();
-  } else {
+    countdown.style.display = "none";
+    main.style.display = "flex";
+    startConfetti();
+
+  // Chờ đợi 1 ngày trước khi chạy đoạn mã tiếp theo
+    // if(distance === -5000)
+    // {
+    //     // Dừng hiệu ứng confetti
+    //     stopConfetti();
+    //     // Cập nhật ngày sinh nhật cho năm tiếp theo
+    //     birthday.setFullYear(birthday.getFullYear() + 1);
+
+    //     // Restart the countdown
+    //     interval = setInterval(updateCountdown, 500);
+    // } // 24 giờ
+  }else {
     // Nếu khoảng cách lớn hơn 0, tức là chưa đến ngày sinh nhật
 
     // Tính số ngày, giờ, phút và giây còn lại
@@ -75,21 +153,11 @@ function updateCountdown() {
     second_dozens.innerHTML = Math.floor(seconds /10);
     var second_unit = document.getElementById("second_unit");
     second_unit.innerHTML = Math.floor(seconds %10);
-
-    // Hiển thị số ngày, giờ, phút và giây còn lại
-    // countdown.innerHTML = "Còn " + days + " ngày " + hours + " giờ "
-    // + minutes + " phút " + seconds + " giây nữa là đến sinh nhật!";
-    if(days==0 && hours==0 && minutes==0 && seconds==0){
-      countdown.style.display = "none";
-      // Hiển thị thẻ B bằng cách đặt display là block
-      main.style.display = "flex";
-      launchConfetti();
-    }
   }
 }
 
 // Khai báo biến lưu trữ hàm setInterval
-var interval = setInterval(updateCountdown, 500);
+let interval = setInterval(updateCountdown, 500);
 
 
 // var count = 0;
