@@ -207,6 +207,19 @@ a{
     z-index: 1;
 }
 
+.main__notification{
+    padding-top: 20px;
+    color: var(--blue);
+    font-family: 'Oldenburg', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+    transform: translateY(-40px);
+    max-width: 750px;
+    text-align: center;
+    z-index: 1;
+}
+
 .balloon-left, .balloon-right{
     position: absolute;
     height: 80%;
