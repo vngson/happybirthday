@@ -72,7 +72,7 @@ var main = document.querySelector(".main");
 let distance;
 // Khai báo hàm để chạy chương trình
 function mainFunction() {
-    // Thay thế 'your-audio-element-id' bằng ID của thẻ audio của bạn
+    // Khai báo biến lưu trữ phần tử audio
     const audioElement = document.querySelector('.main__birthday-audio'); 
     countdown.style.display = "flex";
     main.style.display = "none";
@@ -93,13 +93,8 @@ function mainFunction() {
         // Chạy chương trình chính do bạn code
         countdown.style.display = "none";
         main.style.display = "flex";
-        // Sự kiện mousedown để giả mạo sự tương tác người dùng
-        document.addEventListener('mousedown', function() {
-            // Phát âm thanh
-            audioElement.play();
-            // Gỡ bỏ sự kiện mousedown để tránh lặp lại
-            document.removeEventListener('mousedown', arguments.callee);
-        });
+        // Phát âm thanh
+        audioElement.play();
         launchConfetti();
     }
     // Chờ đợi 1 ngày sau khi chúc sinh nhật thì khởi động lại việc đếm ngược đến sinh nhật năm tiếp theo
@@ -107,6 +102,7 @@ function mainFunction() {
     {
         countdown.style.display = "flex";
         main.style.display = "none";
+        //Dừng âm thanh và reset time
         audioElement.pause();
         audioElement.currentTime = 0;
         // Dừng hiệu ứng confetti
