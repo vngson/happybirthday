@@ -1,2 +1,8 @@
 node_modules/
 .vscode/
+
+# Cấu hình riêng của từng máy / môi trường deploy.
+/config.js
+.env
+.env.*
+!.env.example
